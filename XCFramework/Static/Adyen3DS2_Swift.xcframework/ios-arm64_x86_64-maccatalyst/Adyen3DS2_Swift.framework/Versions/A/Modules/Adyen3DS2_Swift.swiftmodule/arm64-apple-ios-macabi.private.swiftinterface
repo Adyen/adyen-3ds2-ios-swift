@@ -1,0 +1,617 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+// swift-module-flags: -target arm64-apple-ios13.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -module-name Adyen3DS2_Swift
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+@_exported import Adyen3DS2_Swift
+import CommonCrypto
+import CoreLocation
+import Darwin
+import Darwin/*.fputs*/
+import Dispatch
+import Foundation
+import LocalAuthentication
+import MachO
+import QuartzCore
+import Swift
+import UIKit
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import MachO.dyld
+import os.log
+import os
+extension Adyen3DS2_Swift.LegacyInterface {
+  @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use InfoAppearance.")
+  @objc final public class ADYInfoAppearance : ObjectiveC.NSObject {
+    final public var font: UIKit.UIFont
+    final public var textColor: UIKit.UIColor
+    final public var headingFont: UIKit.UIFont
+    final public var headingTextColor: UIKit.UIColor
+    final public var selectionIndicatorTintColor: UIKit.UIColor
+    final public var borderColor: UIKit.UIColor
+    @objc override convenience dynamic public init()
+    @objc deinit
+  }
+}
+extension LocalAuthentication.LAContext : @unchecked Swift.Sendable {
+}
+public enum WarningSeverity : Swift.Int, Swift.Equatable, Swift.Sendable {
+  case low
+  case medium
+  case high
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct Warning : Swift.Sendable, Swift.Equatable {
+  public let identifier: Swift.String
+  public let message: Swift.String
+  public let severity: Adyen3DS2_Swift.WarningSeverity
+  public init(identifier: Swift.String, message: Swift.String, severity: Adyen3DS2_Swift.WarningSeverity)
+  public static func == (a: Adyen3DS2_Swift.Warning, b: Adyen3DS2_Swift.Warning) -> Swift.Bool
+}
+extension Adyen3DS2_Swift.Warning : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct InfoAppearance : Adyen3DS2_Swift.Appearance {
+  public var font: UIKit.UIFont
+  public var textColor: UIKit.UIColor
+  public var headingFont: UIKit.UIFont
+  public var headingTextColor: UIKit.UIColor
+  public var selectionIndicatorTintColor: UIKit.UIColor
+  public var borderColor: UIKit.UIColor {
+    get
+  }
+  public init(font: UIKit.UIFont = UIFont.Adyen.defaultFont, textColor: UIKit.UIColor = UIColor.Adyen.defaultTextColor, headingFont: UIKit.UIFont = UIFont.systemFont(ofSize: 14, weight: .regular), headingTextColor: UIKit.UIColor = UIColor.Adyen.secondaryLabelColor, selectionIndicatorTintColor: UIKit.UIColor = UIColor.Adyen.fillColor, borderColor: UIKit.UIColor = UIColor.Adyen.borderColor)
+}
+public struct AppearanceConfiguration : Swift.Sendable {
+  public let statusBarStyle: UIKit.UIStatusBarStyle?
+  public let backgroundColor: UIKit.UIColor
+  public let textColor: UIKit.UIColor
+  public let borderColor: UIKit.UIColor
+  public let tintColor: UIKit.UIColor
+  public let navigationBarAppearance: Adyen3DS2_Swift.NavigationBarAppearance
+  public let labelAppearance: Adyen3DS2_Swift.LabelAppearance
+  public let textFieldAppearance: Adyen3DS2_Swift.TextFieldAppearance
+  public let selectAppearance: Adyen3DS2_Swift.SelectAppearance
+  public let switchAppearance: Adyen3DS2_Swift.SwitchAppearance
+  public let infoAppearance: Adyen3DS2_Swift.InfoAppearance
+  public let modalPresentationStyle: UIKit.UIModalPresentationStyle
+  public let submitButtonAppearance: Adyen3DS2_Swift.ButtonAppearance
+  public let cancelButtonAppearance: Adyen3DS2_Swift.ButtonAppearance
+  public let resendButtonAppearance: Adyen3DS2_Swift.ButtonAppearance
+  public let openOOBAppButtonAppearance: Adyen3DS2_Swift.ButtonAppearance
+  @_Concurrency.MainActor public init(statusBarStyle: UIKit.UIStatusBarStyle? = nil, backgroundColor: UIKit.UIColor = UIColor.Adyen.backgroundColor, textColor: UIKit.UIColor? = nil, borderColor: UIKit.UIColor? = nil, tintColor: UIKit.UIColor? = nil, navigationBarAppearance: Adyen3DS2_Swift.NavigationBarAppearance = .init(), labelAppearance: Adyen3DS2_Swift.LabelAppearance = .init(), textFieldAppearance: Adyen3DS2_Swift.TextFieldAppearance = .init(), selectAppearance: Adyen3DS2_Swift.SelectAppearance? = nil, switchAppearance: Adyen3DS2_Swift.SwitchAppearance = .init(), infoAppearance: Adyen3DS2_Swift.InfoAppearance = .init(), modalPresentationStyle: UIKit.UIModalPresentationStyle = .fullScreen, submitButtonAppearance: Adyen3DS2_Swift.ButtonAppearance? = nil, cancelButtonAppearance: Adyen3DS2_Swift.ButtonAppearance? = nil, resendButtonAppearance: Adyen3DS2_Swift.ButtonAppearance? = nil, openOOBAppButtonAppearance: Adyen3DS2_Swift.ButtonAppearance? = nil)
+}
+public struct LabelAppearance : Adyen3DS2_Swift.Appearance {
+  public var font: UIKit.UIFont
+  public var textColor: UIKit.UIColor
+  public var headingFont: UIKit.UIFont
+  public var headingTextColor: UIKit.UIColor
+  public var headingLineHeight: CoreFoundation.CGFloat
+  public var subheadingFont: UIKit.UIFont
+  public var subheadingTextColor: UIKit.UIColor
+  public var errorTextColor: UIKit.UIColor
+  public var lineHeight: CoreFoundation.CGFloat
+  public init(font: UIKit.UIFont = UIFont.systemFont(ofSize: 17, weight: .regular), textColor: UIKit.UIColor = .Adyen.labelColor, headingFont: UIKit.UIFont = UIFont.systemFont(ofSize: 34, weight: .bold), headingTextColor: UIKit.UIColor = UIColor.Adyen.labelColor, headingLineHeight: CoreFoundation.CGFloat = 0.0, subheadingFont: UIKit.UIFont = .systemFont(ofSize: 17, weight: .semibold), subheadingTextColor: UIKit.UIColor = .Adyen.labelColor, errorTextColor: UIKit.UIColor = UIColor.Adyen.errorColor, lineHeight: CoreFoundation.CGFloat = 24)
+}
+extension Adyen3DS2_Swift.LegacyInterface {
+  @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use ButtonAppearance.")
+  @objc final public class ADYButtonAppearance : ObjectiveC.NSObject {
+    final public var font: UIKit.UIFont
+    final public var textColor: UIKit.UIColor
+    final public var textTransform: Adyen3DS2_Swift.ButtonAppearanceTextTransform
+    final public var backgroundColor: UIKit.UIColor
+    final public var disabledTextColor: UIKit.UIColor
+    final public var disabledBackgroundColor: UIKit.UIColor
+    final public var highlightedBackgroundColor: UIKit.UIColor?
+    final public var cornerRadius: CoreFoundation.CGFloat
+    @objc deinit
+  }
+}
+public protocol SecurityWarningsDelegate : AnyObject {
+  @_Concurrency.MainActor func securityWarningsFound(_ warnings: [Adyen3DS2_Swift.Warning])
+}
+public struct AuthenticationRequestParameters : Swift.Codable, Swift.Equatable, Swift.Sendable {
+  public let deviceInformation: Swift.String
+  public let sdkApplicationIdentifier: Swift.String
+  public let sdkTransactionIdentifier: Swift.String
+  public let sdkReferenceNumber: Swift.String
+  public let sdkEphemeralPublicKey: Swift.String
+  public let messageVersion: Adyen3DS2_Swift.MessageVersion
+  public static func == (a: Adyen3DS2_Swift.AuthenticationRequestParameters, b: Adyen3DS2_Swift.AuthenticationRequestParameters) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ThreeDSError : Swift.Error, Swift.Equatable, Swift.Encodable {
+  public var errorCode: Swift.String {
+    get
+  }
+  public let errorField: Swift.String?
+  public var base64Representation: Swift.String {
+    get
+  }
+  public var isCancellation: Swift.Bool {
+    get
+  }
+  public static func == (a: Adyen3DS2_Swift.ThreeDSError, b: Adyen3DS2_Swift.ThreeDSError) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@available(*, deprecated, message: "This will not be supported in future versions.")
+public protocol ADYProgressView {
+  func show()
+  func show(completion: @escaping () -> Swift.Void)
+  func hide()
+  func hide(completion: @escaping () -> Swift.Void)
+}
+@_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions.")
+final public class ADYProgress : Adyen3DS2_Swift.ADYProgressView {
+  final public func show()
+  final public func show(completion: @escaping () -> Swift.Void)
+  final public func hide()
+  final public func hide(completion: @escaping () -> Swift.Void)
+  @objc deinit
+}
+public protocol Appearance : Swift.Sendable {
+  var font: UIKit.UIFont { get }
+  var textColor: UIKit.UIColor { get }
+}
+public enum ButtonAppearanceTextTransform : Swift.Sendable {
+  case uppercase
+  case lowercase
+  case none
+  public static func == (a: Adyen3DS2_Swift.ButtonAppearanceTextTransform, b: Adyen3DS2_Swift.ButtonAppearanceTextTransform) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum AppearanceButtonType {
+  case submit
+  case cancel
+  case resend
+  case oob
+  public static func == (a: Adyen3DS2_Swift.AppearanceButtonType, b: Adyen3DS2_Swift.AppearanceButtonType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct ButtonAppearance : Adyen3DS2_Swift.Appearance {
+  public var font: UIKit.UIFont
+  public var textColor: UIKit.UIColor
+  public var textTransform: Adyen3DS2_Swift.ButtonAppearanceTextTransform
+  public var backgroundColor: UIKit.UIColor
+  public var disabledTextColor: UIKit.UIColor
+  public var disabledBackgroundColor: UIKit.UIColor
+  public var highlightedBackgroundColor: UIKit.UIColor?
+  public var cornerRadius: CoreFoundation.CGFloat
+  public init(font: UIKit.UIFont = UIFont.Adyen.defaultFont, textColor: UIKit.UIColor = UIColor.Adyen.defaultTextColor, textTransform: Adyen3DS2_Swift.ButtonAppearanceTextTransform = .none, backgroundColor: UIKit.UIColor, disabledTextColor: UIKit.UIColor, disabledBackgroundColor: UIKit.UIColor, highlightedBackgroundColor: UIKit.UIColor? = nil, cornerRadius: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor public init(buttonType: Adyen3DS2_Swift.AppearanceButtonType)
+}
+public enum ErrorType : Swift.Encodable {
+  case unknownDirectoryServer
+  case deviceFingerprintFailure
+  case secureChannelSetupFailed
+  case invalidResponse
+  case requestFailed
+  case challengeCancelled
+  case unknown
+  case invalidMessage
+  case missingRequiredValue
+  case invalidValue
+  case challengeTimedOut
+  case requestTimedOut
+  case criticalMessageExtensionNotRecognised
+  case invalidTransactionIdentifier
+  case invalidMessageVersion
+  case invalidResponseCounter
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public static func == (a: Adyen3DS2_Swift.ErrorType, b: Adyen3DS2_Swift.ErrorType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension Adyen3DS2_Swift.LegacyInterface {
+  @available(*, deprecated, message: "This will not be supported in future versions. Use ServiceParameters.")
+  @objc final public class ADYServiceParameters : ObjectiveC.NSObject {
+    final public var directoryServerIdentifier: Swift.String
+    final public var directoryServerPublicKey: Swift.String
+    final public var directoryServerRootCertificates: Swift.String
+    public init(directoryServerIdentifier: Swift.String, directoryServerPublicKey: Swift.String, directoryServerRootCertificates: Swift.String)
+    @objc deinit
+  }
+}
+extension UIKit.UIFont {
+  public enum Adyen {
+    public static let defaultFont: UIKit.UIFont
+  }
+}
+extension UIKit.UIColor {
+  public enum Adyen {
+    public static let defaultTextColor: UIKit.UIColor
+    public static var backgroundColor: UIKit.UIColor {
+      get
+    }
+    public static var secondaryBackgroundColor: UIKit.UIColor {
+      get
+    }
+    public static var labelColor: UIKit.UIColor {
+      get
+    }
+    public static var secondaryLabelColor: UIKit.UIColor {
+      get
+    }
+    public static var tertiaryLabelColor: UIKit.UIColor {
+      get
+    }
+    public static var quaternaryLabelColor: UIKit.UIColor {
+      get
+    }
+    public static var disabledButtonColor: UIKit.UIColor {
+      get
+    }
+    public static var borderColor: UIKit.UIColor {
+      get
+    }
+    public static var fillColor: UIKit.UIColor {
+      get
+    }
+    public static var errorColor: UIKit.UIColor {
+      get
+    }
+    @_Concurrency.MainActor public static var systemTintColor: UIKit.UIColor {
+      get
+    }
+  }
+}
+extension Adyen3DS2_Swift.LegacyInterface {
+  @_hasMissingDesignatedInitializers @objc final public class ADYService : ObjectiveC.NSObject {
+    final public var warnings: [Adyen3DS2_Swift.LegacyInterface.ADYWarning]
+    @available(*, deprecated, message: "This will not be supported in future versions. Use Transaction.initialize.")
+    public static func service(with serviceParameters: Adyen3DS2_Swift.LegacyInterface.ADYServiceParameters, appearanceConfiguration: Adyen3DS2_Swift.LegacyInterface.ADYAppearanceConfiguration?, completion: @escaping (Adyen3DS2_Swift.LegacyInterface.ADYService) -> Swift.Void)
+    @available(*, deprecated, message: "This will not be supported in future versions. Use Transaction.initialize.")
+    final public func transaction(withMessageVersion messageVersion: Swift.String) throws -> Adyen3DS2_Swift.LegacyInterface.ADYTransaction
+    @objc deinit
+  }
+}
+public struct SwitchAppearance : Adyen3DS2_Swift.Appearance {
+  public var font: UIKit.UIFont
+  public var textColor: UIKit.UIColor
+  public var switchTintColor: UIKit.UIColor?
+  public init(font: UIKit.UIFont = UIFont.systemFont(ofSize: 14, weight: .regular), textColor: UIKit.UIColor = UIColor.Adyen.labelColor, switchTintColor: UIKit.UIColor? = nil)
+}
+public struct TextFieldAppearance : Adyen3DS2_Swift.Appearance {
+  public let font: UIKit.UIFont
+  public var textColor: UIKit.UIColor {
+    get
+  }
+  public let borderWidth: CoreFoundation.CGFloat
+  public var borderColor: UIKit.UIColor {
+    get
+  }
+  public let cornerRadius: CoreFoundation.CGFloat
+  public let keyboardAppearance: UIKit.UIKeyboardAppearance?
+  public init(font: UIKit.UIFont = UIFont.systemFont(ofSize: 17, weight: .regular), textColor: UIKit.UIColor = UIColor.Adyen.labelColor, borderWidth: CoreFoundation.CGFloat = 0.0, borderColor: UIKit.UIColor = UIColor.Adyen.borderColor, cornerRadius: CoreFoundation.CGFloat = 0.0, keyboardAppearance: UIKit.UIKeyboardAppearance? = nil)
+}
+public struct ChallengeResult : Swift.Codable, Swift.Sendable, Swift.Equatable {
+  public let transactionStatus: Swift.String
+  public static func == (a: Adyen3DS2_Swift.ChallengeResult, b: Adyen3DS2_Swift.ChallengeResult) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+extension Adyen3DS2_Swift.LegacyInterface {
+  @available(*, deprecated, message: "This will not be supported in future versions. Use ChallengeParameters.")
+  @objc final public class ADYChallengeParameters : ObjectiveC.NSObject {
+    public init(serverTransactionIdentifier: Swift.String, threeDSRequestorAppURL: Foundation.URL?, acsTransactionIdentifier: Swift.String, acsReferenceNumber: Swift.String, acsSignedContent: Swift.String)
+    @objc deinit
+  }
+}
+public struct ChallengeParameters : Swift.Sendable {
+  public let threeDSRequestorAppURL: Foundation.URL?
+  public let serverTransactionIdentifier: Swift.String
+  public let acsTransactionIdentifier: Swift.String
+  public let acsReferenceNumber: Swift.String
+  public let acsSignedContent: Swift.String
+  public init(serverTransactionIdentifier: Swift.String, threeDSRequestorAppURL: Foundation.URL?, acsTransactionIdentifier: Swift.String, acsReferenceNumber: Swift.String, acsSignedContent: Swift.String)
+}
+extension Adyen3DS2_Swift.LegacyInterface {
+  @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use SelectAppearance.")
+  @objc final public class ADYSelectAppearance : ObjectiveC.NSObject {
+    final public var font: UIKit.UIFont
+    final public var textColor: UIKit.UIColor
+    final public var borderColor: UIKit.UIColor
+    final public var highlightedBackgroundColor: UIKit.UIColor
+    final public var selectionIndicatorTintColor: UIKit.UIColor?
+    @_Concurrency.MainActor @objc override convenience dynamic public init()
+    @objc deinit
+  }
+}
+extension Adyen3DS2_Swift.LegacyInterface {
+  @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use SwitchAppearance.")
+  @objc final public class ADYSwitchAppearance : ObjectiveC.NSObject {
+    final public var font: UIKit.UIFont
+    final public var textColor: UIKit.UIColor
+    final public var switchTintColor: UIKit.UIColor?
+    @objc override convenience dynamic public init()
+    @objc deinit
+  }
+}
+extension Adyen3DS2_Swift.LegacyInterface {
+  @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use NavigationBarAppearance.")
+  @objc final public class ADYNavigationBarAppearance : ObjectiveC.NSObject {
+    final public var title: Swift.String?
+    final public var cancelButtonTitle: Swift.String?
+    final public var backgroundColor: UIKit.UIColor?
+    final public var font: UIKit.UIFont
+    final public var textColor: UIKit.UIColor
+    @objc override convenience dynamic public init()
+    @objc deinit
+  }
+}
+public struct NavigationBarAppearance : Adyen3DS2_Swift.Appearance {
+  public var title: Swift.String?
+  public var cancelButtonTitle: Swift.String?
+  public var backgroundColor: UIKit.UIColor?
+  public var font: UIKit.UIFont
+  public var textColor: UIKit.UIColor
+  public init(font: UIKit.UIFont = UIFont.systemFont(ofSize: 17, weight: .semibold), textColor: UIKit.UIColor = UIColor.Adyen.labelColor, title: Swift.String? = nil, cancelButtonTitle: Swift.String? = nil, backgroundColor: UIKit.UIColor? = nil)
+}
+public protocol _LoadingIndicator {
+  func show(completion: @escaping @Sendable () -> Swift.Void)
+  func hide(completion: @escaping @Sendable () -> Swift.Void)
+}
+public protocol _ImageSource : Swift.Sendable {
+  func image() async -> UIKit.UIImage?
+}
+public struct _ClosureImageProvider : Adyen3DS2_Swift._ImageSource {
+  public init(closure: @escaping @Sendable () -> UIKit.UIImage?)
+  public func image() async -> UIKit.UIImage?
+}
+@_Concurrency.MainActor public enum _LoadingIndicatorProvider {
+  @_Concurrency.MainActor public static func _loadingIndicator(imageSource: (any Adyen3DS2_Swift._ImageSource)? = nil, appearanceConfiguration: Adyen3DS2_Swift.AppearanceConfiguration, presentingViewController: UIKit.UIViewController) -> any Adyen3DS2_Swift._LoadingIndicator
+}
+@_hasMissingDesignatedInitializers @_Concurrency.MainActor final public class Transaction {
+  @_Concurrency.MainActor final public var authenticationRequestParameters: Adyen3DS2_Swift.AuthenticationRequestParameters {
+    get throws
+  }
+  public enum Constants {
+    public static let minimumChallengeTimeout: Swift.Double
+  }
+  @_Concurrency.MainActor convenience public init(serviceParameters: Adyen3DS2_Swift.ServiceParameters, messageVersion: Adyen3DS2_Swift.MessageVersion, appearanceConfiguration: Adyen3DS2_Swift.AppearanceConfiguration, securityDelegate: any Adyen3DS2_Swift.SecurityWarningsDelegate) async throws
+  nonisolated public static func initialize(serviceParameters: Adyen3DS2_Swift.ServiceParameters, messageVersion: Adyen3DS2_Swift.MessageVersion, securityDelegate: any Adyen3DS2_Swift.SecurityWarningsDelegate, appearanceConfiguration: Adyen3DS2_Swift.AppearanceConfiguration, completion: @escaping @_Concurrency.MainActor @Sendable (Swift.Result<Adyen3DS2_Swift.Transaction, any Swift.Error>) -> Swift.Void)
+  nonisolated final public func performChallenge(with challengeParameters: Adyen3DS2_Swift.ChallengeParameters, presenterViewController: UIKit.UIViewController, timeout: Foundation.TimeInterval = Transaction.Constants.minimumChallengeTimeout, completion: @escaping @Sendable (Swift.Result<Adyen3DS2_Swift.ChallengeResult, any Swift.Error>) -> Swift.Void)
+  @_Concurrency.MainActor final public func performChallenge(with challengeParameters: Adyen3DS2_Swift.ChallengeParameters, presenterViewController: UIKit.UIViewController, timeout: Foundation.TimeInterval = Transaction.Constants.minimumChallengeTimeout) async throws -> Adyen3DS2_Swift.ChallengeResult
+  @_Concurrency.MainActor final public func close()
+  @_Concurrency.MainActor final public func cancelChallenge()
+  @objc deinit
+}
+public struct SelectAppearance : Adyen3DS2_Swift.Appearance {
+  public let font: UIKit.UIFont
+  public var textColor: UIKit.UIColor {
+    get
+  }
+  public var borderColor: UIKit.UIColor {
+    get
+  }
+  public let highlightedBackgroundColor: UIKit.UIColor
+  public var selectionIndicatorTintColor: UIKit.UIColor? {
+    get
+  }
+  @_Concurrency.MainActor public init(font: UIKit.UIFont = UIFont.systemFont(ofSize: 17, weight: .regular), textColor: UIKit.UIColor = UIColor.Adyen.labelColor, borderColor: UIKit.UIColor = UIColor.Adyen.borderColor, highlightedBackgroundColor: UIKit.UIColor = UIColor.Adyen.secondaryBackgroundColor, selectionIndicatorTintColor: UIKit.UIColor? = nil)
+}
+@available(*, deprecated, message: "This will not be supported in future versions. Use WarningSeverity.")
+extension Adyen3DS2_Swift.LegacyInterface {
+  @objc public enum ADYWarningSeverity : Swift.Int {
+    case low
+    case medium
+    case high
+    public init?(rawValue: Swift.Int)
+    @available(*, deprecated, message: "This will not be supported in future versions. Use WarningSeverity.")
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+}
+extension Adyen3DS2_Swift.LegacyInterface {
+  @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use Warning.")
+  @objc final public class ADYWarning : ObjectiveC.NSObject {
+    final public let identifier: Swift.String
+    final public let message: Swift.String
+    final public let severity: Adyen3DS2_Swift.LegacyInterface.ADYWarningSeverity
+    @objc deinit
+  }
+}
+extension Adyen3DS2_Swift.LegacyInterface {
+  @available(*, deprecated, message: "This will not be supported in future versions. Use AppearanceButtonType.")
+  @objc public enum ADYAppearanceButtonType : Swift.Int {
+    case submit
+    case cancel
+    case resend
+    case oob
+    public init?(rawValue: Swift.Int)
+    @available(*, deprecated, message: "This will not be supported in future versions. Use AppearanceButtonType.")
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+}
+extension Adyen3DS2_Swift.LegacyInterface {
+  @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use ChallengeResult.")
+  @objc final public class ADYChallengeResult : ObjectiveC.NSObject {
+    final public let SDKTransactionIdentifier: Swift.String
+    final public let transactionStatus: Swift.String
+    @objc deinit
+  }
+}
+extension Adyen3DS2_Swift.LegacyInterface {
+  @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use TextFieldAppearance.")
+  @objc final public class ADYTextFieldAppearance : ObjectiveC.NSObject {
+    final public var font: UIKit.UIFont
+    final public var textColor: UIKit.UIColor
+    final public var borderWidth: CoreFoundation.CGFloat
+    final public var borderColor: UIKit.UIColor
+    final public var cornerRadius: CoreFoundation.CGFloat
+    final public var keyboardAppearance: UIKit.UIKeyboardAppearance?
+    @objc convenience override dynamic public init()
+    @objc deinit
+  }
+}
+extension Adyen3DS2_Swift.LegacyInterface {
+  @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use AppearanceConfiguration.")
+  final public class ADYAppearanceConfiguration : ObjectiveC.NSObject {
+    final public var statusBarStyle: UIKit.UIStatusBarStyle
+    final public var backgroundColor: UIKit.UIColor
+    final public var textColor: UIKit.UIColor
+    final public var borderColor: UIKit.UIColor
+    final public var tintColor: UIKit.UIColor
+    final public let navigationBarAppearance: Adyen3DS2_Swift.LegacyInterface.ADYNavigationBarAppearance
+    final public let labelAppearance: Adyen3DS2_Swift.LegacyInterface.ADYLabelAppearance
+    final public let textFieldAppearance: Adyen3DS2_Swift.LegacyInterface.ADYTextFieldAppearance
+    final public let selectAppearance: Adyen3DS2_Swift.LegacyInterface.ADYSelectAppearance
+    final public let switchAppearance: Adyen3DS2_Swift.LegacyInterface.ADYSwitchAppearance
+    final public let infoAppearance: Adyen3DS2_Swift.LegacyInterface.ADYInfoAppearance
+    final public var modalPresentationStyle: UIKit.UIModalPresentationStyle
+    @_Concurrency.MainActor final public func buttonAppearance(for buttonType: Adyen3DS2_Swift.LegacyInterface.ADYAppearanceButtonType) -> Adyen3DS2_Swift.LegacyInterface.ADYButtonAppearance
+    @_Concurrency.MainActor @objc override convenience dynamic public init()
+    @objc deinit
+  }
+}
+public func SDKVersion() -> Swift.String
+@available(*, deprecated, message: "This will not be supported in future versions. Use SDKVersion().")
+public func ADY3DS2SDKVersion() -> Swift.String
+extension Adyen3DS2_Swift.LegacyInterface {
+  @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use AuthenticationRequestParameters.")
+  @objc final public class ADYAuthenticationRequestParameters : ObjectiveC.NSObject {
+    final public let deviceInformation: Swift.String
+    final public let sdkApplicationIdentifier: Swift.String
+    final public let sdkTransactionIdentifier: Swift.String
+    final public let sdkReferenceNumber: Swift.String
+    final public let sdkEphemeralPublicKey: Swift.String
+    final public var messageVersion: Swift.String {
+      get
+    }
+    @objc deinit
+  }
+}
+public enum LegacyInterface {
+  public static let ADYRuntimeErrorDomain: Swift.String
+  public protocol ADYSecurityWarningsDelegate : AnyObject {
+    func securityWarningsFound(_ warnings: [Adyen3DS2_Swift.LegacyInterface.ADYWarning])
+  }
+  public protocol ADYChallengeDelegate : AnyObject {
+    func challengeDidFinish(result: Adyen3DS2_Swift.LegacyInterface.ADYChallengeResult)
+    func challengeDidFail(error: Foundation.NSError)
+  }
+  public enum ADYRuntimeErrorCode : Swift.Int {
+    case unknownDirectoryServer
+    case secureChannelSetupFailed
+    case invalidResponse
+    case requestFailed
+    case challengeTimedOut
+    case challengeCancelled
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use Transaction.")
+  @objc final public class ADYTransaction : ObjectiveC.NSObject {
+    weak final public var securityDelegate: (any Adyen3DS2_Swift.LegacyInterface.ADYSecurityWarningsDelegate)?
+    final public var authenticationRequestParameters: Adyen3DS2_Swift.LegacyInterface.ADYAuthenticationRequestParameters
+    final public let progressView: any Adyen3DS2_Swift.ADYProgressView
+    @available(*, deprecated, message: "This will not be supported in future versions. Use Transaction.performChallenge.")
+    final public func performChallenge(with challengeParameters: Adyen3DS2_Swift.LegacyInterface.ADYChallengeParameters, completion: @escaping (Adyen3DS2_Swift.LegacyInterface.ADYChallengeResult?, Foundation.NSError?) -> Swift.Void)
+    final public func performChallenge(with challengeParameters: Adyen3DS2_Swift.LegacyInterface.ADYChallengeParameters, timeout: Foundation.TimeInterval, completion: @escaping (Adyen3DS2_Swift.LegacyInterface.ADYChallengeResult?, Foundation.NSError?) -> Swift.Void)
+    @available(*, deprecated, message: "This will not be supported in future versions. Use Transaction.performChallenge.")
+    final public func performChallenge(challengeParameters: Adyen3DS2_Swift.LegacyInterface.ADYChallengeParameters, delegate: any Adyen3DS2_Swift.LegacyInterface.ADYChallengeDelegate, timeout: Foundation.TimeInterval)
+    @available(*, deprecated, message: "This will not be supported in future versions. Use Transaction.performChallenge.")
+    final public func performChallenge(challengeParameters: Adyen3DS2_Swift.LegacyInterface.ADYChallengeParameters, delegate: any Adyen3DS2_Swift.LegacyInterface.ADYChallengeDelegate)
+    @objc deinit
+  }
+}
+extension Foundation.NSError {
+  public func opaqueBase64StringRepresentation() -> Swift.String
+}
+extension Adyen3DS2_Swift.LegacyInterface.ADYTransaction : Adyen3DS2_Swift.LegacyInterface.ADYSecurityWarningsDelegate {
+  nonisolated final public func securityWarningsFound(_ warnings: [Adyen3DS2_Swift.LegacyInterface.ADYWarning])
+}
+public enum MessageVersion : Swift.Sendable {
+  case v2_1_0
+  case v2_2_0
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(stringValue: Swift.String)
+  public var stringValue: Swift.String {
+    get
+  }
+}
+extension Adyen3DS2_Swift.MessageVersion : Swift.Comparable {
+  public static func < (lhs: Adyen3DS2_Swift.MessageVersion, rhs: Adyen3DS2_Swift.MessageVersion) -> Swift.Bool
+}
+extension Adyen3DS2_Swift.MessageVersion : Swift.RawRepresentable, Swift.Equatable, Swift.Codable {
+  public typealias RawValue = Swift.String
+}
+extension Adyen3DS2_Swift.LegacyInterface {
+  @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use LabelAppearance.")
+  @objc final public class ADYLabelAppearance : ObjectiveC.NSObject {
+    final public var font: UIKit.UIFont
+    final public var textColor: UIKit.UIColor
+    final public var headingFont: UIKit.UIFont
+    final public var headingTextColor: UIKit.UIColor
+    final public var headingLineHeight: CoreFoundation.CGFloat
+    final public var subheadingFont: UIKit.UIFont
+    final public var subheadingTextColor: UIKit.UIColor
+    final public var errorTextColor: UIKit.UIColor
+    final public var lineHeight: CoreFoundation.CGFloat
+    @objc override convenience dynamic public init()
+    @objc deinit
+  }
+}
+public struct ServiceParameters : Swift.Codable, Swift.Equatable, Swift.Sendable {
+  public init(directoryServerIdentifier: Swift.String, directoryServerPublicKey: Swift.String, directoryServerRootCertificates: Swift.String, deviceExcludedParameters: [Swift.String : Any] = [:]) throws
+  public static func == (a: Adyen3DS2_Swift.ServiceParameters, b: Adyen3DS2_Swift.ServiceParameters) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+extension Adyen3DS2_Swift.WarningSeverity : Swift.Hashable {}
+extension Adyen3DS2_Swift.WarningSeverity : Swift.RawRepresentable {}
+extension Adyen3DS2_Swift.ButtonAppearanceTextTransform : Swift.Equatable {}
+extension Adyen3DS2_Swift.ButtonAppearanceTextTransform : Swift.Hashable {}
+extension Adyen3DS2_Swift.AppearanceButtonType : Swift.Equatable {}
+extension Adyen3DS2_Swift.AppearanceButtonType : Swift.Hashable {}
+extension Adyen3DS2_Swift.ErrorType : Swift.Equatable {}
+extension Adyen3DS2_Swift.ErrorType : Swift.Hashable {}
+extension Adyen3DS2_Swift._LoadingIndicatorProvider : Swift.Sendable {}
+extension Adyen3DS2_Swift.Transaction : Swift.Sendable {}
+@available(*, deprecated, message: "This will not be supported in future versions. Use WarningSeverity.")
+extension Adyen3DS2_Swift.LegacyInterface.ADYWarningSeverity : Swift.Equatable {}
+@available(*, deprecated, message: "This will not be supported in future versions. Use WarningSeverity.")
+extension Adyen3DS2_Swift.LegacyInterface.ADYWarningSeverity : Swift.Hashable {}
+@available(*, deprecated, message: "This will not be supported in future versions. Use WarningSeverity.")
+extension Adyen3DS2_Swift.LegacyInterface.ADYWarningSeverity : Swift.RawRepresentable {}
+@available(*, deprecated, message: "This will not be supported in future versions. Use AppearanceButtonType.")
+extension Adyen3DS2_Swift.LegacyInterface.ADYAppearanceButtonType : Swift.Equatable {}
+@available(*, deprecated, message: "This will not be supported in future versions. Use AppearanceButtonType.")
+extension Adyen3DS2_Swift.LegacyInterface.ADYAppearanceButtonType : Swift.Hashable {}
+@available(*, deprecated, message: "This will not be supported in future versions. Use AppearanceButtonType.")
+extension Adyen3DS2_Swift.LegacyInterface.ADYAppearanceButtonType : Swift.RawRepresentable {}
+extension Adyen3DS2_Swift.LegacyInterface.ADYRuntimeErrorCode : Swift.Equatable {}
+extension Adyen3DS2_Swift.LegacyInterface.ADYRuntimeErrorCode : Swift.Hashable {}
+extension Adyen3DS2_Swift.LegacyInterface.ADYRuntimeErrorCode : Swift.RawRepresentable {}
+extension Adyen3DS2_Swift.MessageVersion : Swift.Hashable {}

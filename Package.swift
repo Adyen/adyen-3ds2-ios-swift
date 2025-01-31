@@ -4,22 +4,22 @@
 import PackageDescription
 
 let package = Package(
-    name: "Adyen3DS2",
+    name: "Adyen3DS2_Swift",
     platforms: [
         .iOS(.v10),
         .macOS(.v10_15)
     ],
     products: [
         .library(
-            name: "Adyen3DS2",
-            targets: ["Adyen3DS2"]
+            name: "Adyen3DS2_Swift",
+            targets: ["Adyen3DS2_Swift"]
         )
     ],
     dependencies: [],
     targets: [
         .binaryTarget(
-            name: "Adyen3DS2",
-            path: "XCFramework/Dynamic/Adyen3DS2.xcframework"
+            name: "Adyen3DS2_Swift",
+            path: "XCFramework/Dynamic/Adyen3DS2_Swift.xcframework"
         )
     ]
 )

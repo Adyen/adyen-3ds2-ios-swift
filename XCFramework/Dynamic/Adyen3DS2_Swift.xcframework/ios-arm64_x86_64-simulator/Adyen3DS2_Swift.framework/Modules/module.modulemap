@@ -1,0 +1,11 @@
+framework module Adyen3DS2_Swift {
+  umbrella header "Adyen3DS2_Swift.h"
+  export *
+
+  module * { export * }
+}
+
+module Adyen3DS2_Swift.Swift {
+  header "Adyen3DS2_Swift-Swift.h"
+  requires objc
+}
