@@ -1,4 +1,4 @@
-name: Publish Adyen3DS2.podspec
+name: Publish Adyen3DS2_Swift.podspec
 on: [workflow_dispatch]
 jobs:
 
