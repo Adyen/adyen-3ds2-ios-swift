@@ -60,7 +60,7 @@ echo "platform :ios, '11.0'
 target '$PROJECT_NAME' do
 use_frameworks!
 
-pod 'Adyen3DS2', :path => '../'
+pod 'Adyen3DS2_Swift', :path => '../'
 end
 
 post_install do |installer|

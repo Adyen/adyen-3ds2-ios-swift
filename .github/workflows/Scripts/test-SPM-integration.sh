@@ -31,13 +31,13 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(name: \"Adyen3DS2\", path: \"../\"),
+        .package(name: \"Adyen3DS2_Swift\", path: \"../\"),
     ],
     targets: [
         .target(
             name: \"TempProject\",
             dependencies: [
-                .product(name: \"Adyen3DS2\", package: \"Adyen3DS2\")
+                .product(name: \"Adyen3DS2_Swift\", package: \"Adyen3DS2_Swift\")
             ]
         )
     ]
