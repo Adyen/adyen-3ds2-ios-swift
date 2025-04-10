@@ -33,7 +33,7 @@ Drag the dynamic `XCFramework/Dynamic/Adyen3DS2_Swift.xcframework` to the `Frame
 1. Follow Apple's [Adding Package Dependencies to Your App](
 https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app
 ) guide on how to add a Swift Package dependency.
-2. Use `https://github.com/robertdalmeida/adyen-3ds2-ios-swift.git` as the repository URL.
+2. Use `https://github.com/Adyen/adyen-3ds2-ios-swift.git` as the repository URL.
 3. Specify the version to be at least `3.0.0`.
 
 :warning: _Please make sure to use Xcode 12.0+ when adding `Adyen3DS2_Swift` using Swift Package Manager._
