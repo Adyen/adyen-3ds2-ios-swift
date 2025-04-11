@@ -166,6 +166,4 @@ typealias ADYAuthenticationRequestParameters = LegacyInterface.ADYAuthentication
 
 ## License
 
-This SDK is available under the Apache License, Version 2.0. For more information, see the [LICENSE](https://github.com/Adyen/adyen-3ds2-ios/blob/master/LICENSE) file.
-
-The SDK make use of some open source code under the [`BSD 2-Clause License`](https://github.com/Adyen/adyen-3ds2-ios/ThirdParty-LICENSE.md)
+This repository is open source and available under the MIT license. For more information, see the LICENSE file.
