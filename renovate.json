@@ -1,5 +1,20 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base"],
-  "minimumReleaseAge": "21 days"
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions updates",
+      "schedule": ["weekly"]
+    },
+    {
+      "matchManagers": ["swift"],
+      "groupName": "Swift dependencies",
+      "schedule": ["weekly"]
+    },
+    {
+      "matchManagers": ["cocoapods"],
+      "groupName": "CocoaPods dependencies",
+      "schedule": ["weekly"]
+    }
+  ]
 }
