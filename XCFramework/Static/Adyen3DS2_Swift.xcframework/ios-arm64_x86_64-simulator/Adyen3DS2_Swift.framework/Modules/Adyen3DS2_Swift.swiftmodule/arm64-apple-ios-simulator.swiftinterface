@@ -1,12 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
-// swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -module-name Adyen3DS2_Swift
+// swift-compiler-version: Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+// swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -Osize -module-name Adyen3DS2_Swift
 // swift-module-flags-ignorable: -no-verify-emitted-module-interface
 @_exported import Adyen3DS2_Swift
 import CommonCrypto
 import CoreLocation
 import Darwin
-import Darwin/*.fputs*/
 import Dispatch
 import Foundation
 import LocalAuthentication
@@ -33,8 +32,6 @@ extension Adyen3DS2_Swift.LegacyInterface {
     @objc override convenience dynamic public init()
     @objc deinit
   }
-}
-extension LocalAuthentication.LAContext : @unchecked Swift.Sendable {
 }
 public enum WarningSeverity : Swift.Int, Swift.Equatable, Swift.Sendable {
   case low
@@ -144,18 +141,18 @@ public struct ThreeDSError : Swift.Error, Swift.Equatable, Swift.Encodable {
   public func encode(to encoder: any Swift.Encoder) throws
 }
 @available(*, deprecated, message: "This will not be supported in future versions.")
-public protocol ADYProgressView {
-  func show()
-  func show(completion: @escaping () -> Swift.Void)
-  func hide()
-  func hide(completion: @escaping () -> Swift.Void)
+@_Concurrency.MainActor public protocol ADYProgressView {
+  @_Concurrency.MainActor func show()
+  @_Concurrency.MainActor func show(completion: @escaping () -> Swift.Void)
+  @_Concurrency.MainActor func hide()
+  @_Concurrency.MainActor func hide(completion: @escaping () -> Swift.Void)
 }
 @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions.")
-final public class ADYProgress : Adyen3DS2_Swift.ADYProgressView {
-  final public func show()
-  final public func show(completion: @escaping () -> Swift.Void)
-  final public func hide()
-  final public func hide(completion: @escaping () -> Swift.Void)
+@objc @_Concurrency.MainActor final public class ADYProgress : ObjectiveC.NSObject, Adyen3DS2_Swift.ADYProgressView {
+  @_Concurrency.MainActor final public func show()
+  @_Concurrency.MainActor final public func show(completion: @escaping () -> Swift.Void)
+  @_Concurrency.MainActor final public func hide()
+  @_Concurrency.MainActor final public func hide(completion: @escaping () -> Swift.Void)
   @objc deinit
 }
 public protocol Appearance : Swift.Sendable {
@@ -276,12 +273,12 @@ extension UIKit.UIColor {
   }
 }
 extension Adyen3DS2_Swift.LegacyInterface {
-  @_hasMissingDesignatedInitializers @objc final public class ADYService : ObjectiveC.NSObject {
-    final public var warnings: [Adyen3DS2_Swift.LegacyInterface.ADYWarning]
+  @_hasMissingDesignatedInitializers @objc @_Concurrency.MainActor final public class ADYService : ObjectiveC.NSObject {
+    @_Concurrency.MainActor final public var warnings: [Adyen3DS2_Swift.LegacyInterface.ADYWarning]
     @available(*, deprecated, message: "This will not be supported in future versions. Use Transaction.initialize.")
-    public static func service(with serviceParameters: Adyen3DS2_Swift.LegacyInterface.ADYServiceParameters, appearanceConfiguration: Adyen3DS2_Swift.LegacyInterface.ADYAppearanceConfiguration?, completion: @escaping (Adyen3DS2_Swift.LegacyInterface.ADYService) -> Swift.Void)
+    @_Concurrency.MainActor public static func service(with serviceParameters: Adyen3DS2_Swift.LegacyInterface.ADYServiceParameters, appearanceConfiguration: Adyen3DS2_Swift.LegacyInterface.ADYAppearanceConfiguration?, completion: @escaping (Adyen3DS2_Swift.LegacyInterface.ADYService) -> Swift.Void)
     @available(*, deprecated, message: "This will not be supported in future versions. Use Transaction.initialize.")
-    final public func transaction(withMessageVersion messageVersion: Swift.String) throws -> Adyen3DS2_Swift.LegacyInterface.ADYTransaction
+    @_Concurrency.MainActor final public func transaction(withMessageVersion messageVersion: Swift.String) throws -> Adyen3DS2_Swift.LegacyInterface.ADYTransaction
     @objc deinit
   }
 }
@@ -367,9 +364,9 @@ public struct NavigationBarAppearance : Adyen3DS2_Swift.Appearance {
   public var textColor: UIKit.UIColor
   public init(font: UIKit.UIFont = UIFont.systemFont(ofSize: 17, weight: .semibold), textColor: UIKit.UIColor = UIColor.Adyen.labelColor, title: Swift.String? = nil, cancelButtonTitle: Swift.String? = nil, backgroundColor: UIKit.UIColor? = nil)
 }
-public protocol _LoadingIndicator {
-  func show(completion: @escaping @Sendable () -> Swift.Void)
-  func hide(completion: @escaping @Sendable () -> Swift.Void)
+@_Concurrency.MainActor public protocol _LoadingIndicator : Swift.Sendable {
+  @_Concurrency.MainActor func show(completion: @escaping @Sendable () -> Swift.Void)
+  @_Concurrency.MainActor func hide(completion: @escaping @Sendable () -> Swift.Void)
 }
 public protocol _ImageSource : Swift.Sendable {
   func image() async -> UIKit.UIImage?
@@ -383,16 +380,17 @@ public struct _ClosureImageProvider : Adyen3DS2_Swift._ImageSource {
 }
 @_hasMissingDesignatedInitializers @_Concurrency.MainActor final public class Transaction {
   @_Concurrency.MainActor final public var authenticationRequestParameters: Adyen3DS2_Swift.AuthenticationRequestParameters {
-    get throws
+    get async throws
   }
   public enum Constants {
     public static let minimumChallengeTimeout: Swift.Double
   }
   @_Concurrency.MainActor convenience public init(serviceParameters: Adyen3DS2_Swift.ServiceParameters, messageVersion: Adyen3DS2_Swift.MessageVersion, appearanceConfiguration: Adyen3DS2_Swift.AppearanceConfiguration, securityDelegate: any Adyen3DS2_Swift.SecurityWarningsDelegate) async throws
-  nonisolated public static func initialize(serviceParameters: Adyen3DS2_Swift.ServiceParameters, messageVersion: Adyen3DS2_Swift.MessageVersion, securityDelegate: any Adyen3DS2_Swift.SecurityWarningsDelegate, appearanceConfiguration: Adyen3DS2_Swift.AppearanceConfiguration, completion: @escaping @_Concurrency.MainActor @Sendable (Swift.Result<Adyen3DS2_Swift.Transaction, any Swift.Error>) -> Swift.Void)
+  @_Concurrency.MainActor public static func initialize(serviceParameters: Adyen3DS2_Swift.ServiceParameters, messageVersion: Adyen3DS2_Swift.MessageVersion, securityDelegate: any Adyen3DS2_Swift.SecurityWarningsDelegate, appearanceConfiguration: Adyen3DS2_Swift.AppearanceConfiguration, completion: @escaping @_Concurrency.MainActor @Sendable (Swift.Result<Adyen3DS2_Swift.Transaction, any Swift.Error>) -> Swift.Void)
   nonisolated final public func performChallenge(with challengeParameters: Adyen3DS2_Swift.ChallengeParameters, presenterViewController: UIKit.UIViewController, timeout: Foundation.TimeInterval = Transaction.Constants.minimumChallengeTimeout, completion: @escaping @Sendable (Swift.Result<Adyen3DS2_Swift.ChallengeResult, any Swift.Error>) -> Swift.Void)
-  @_Concurrency.MainActor final public func performChallenge(with challengeParameters: Adyen3DS2_Swift.ChallengeParameters, presenterViewController: UIKit.UIViewController, timeout: Foundation.TimeInterval = Transaction.Constants.minimumChallengeTimeout) async throws -> Adyen3DS2_Swift.ChallengeResult
-  @_Concurrency.MainActor final public func close()
+  @_Concurrency.MainActor final public func performChallenge(with challengeParameters: Adyen3DS2_Swift.ChallengeParameters, presenterViewController: UIKit.UIViewController, timeout: Foundation.TimeInterval = Transaction.Constants
+            .minimumChallengeTimeout) async throws -> Adyen3DS2_Swift.ChallengeResult
+  @_Concurrency.MainActor final public func close() async
   @_Concurrency.MainActor final public func cancelChallenge()
   @objc deinit
 }
@@ -412,7 +410,7 @@ public struct SelectAppearance : Adyen3DS2_Swift.Appearance {
 }
 @available(*, deprecated, message: "This will not be supported in future versions. Use WarningSeverity.")
 extension Adyen3DS2_Swift.LegacyInterface {
-  @objc public enum ADYWarningSeverity : Swift.Int {
+  @objc public enum ADYWarningSeverity : Swift.Int, Swift.Sendable {
     case low
     case medium
     case high
@@ -426,7 +424,7 @@ extension Adyen3DS2_Swift.LegacyInterface {
 }
 extension Adyen3DS2_Swift.LegacyInterface {
   @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use Warning.")
-  @objc final public class ADYWarning : ObjectiveC.NSObject {
+  @objc final public class ADYWarning : ObjectiveC.NSObject, Swift.Sendable {
     final public let identifier: Swift.String
     final public let message: Swift.String
     final public let severity: Adyen3DS2_Swift.LegacyInterface.ADYWarningSeverity
@@ -465,25 +463,25 @@ extension Adyen3DS2_Swift.LegacyInterface {
     final public var borderColor: UIKit.UIColor
     final public var cornerRadius: CoreFoundation.CGFloat
     final public var keyboardAppearance: UIKit.UIKeyboardAppearance?
-    @objc convenience override dynamic public init()
+    @objc override convenience dynamic public init()
     @objc deinit
   }
 }
 extension Adyen3DS2_Swift.LegacyInterface {
   @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use AppearanceConfiguration.")
-  final public class ADYAppearanceConfiguration : ObjectiveC.NSObject {
-    final public var statusBarStyle: UIKit.UIStatusBarStyle
-    final public var backgroundColor: UIKit.UIColor
-    final public var textColor: UIKit.UIColor
-    final public var borderColor: UIKit.UIColor
-    final public var tintColor: UIKit.UIColor
-    final public let navigationBarAppearance: Adyen3DS2_Swift.LegacyInterface.ADYNavigationBarAppearance
-    final public let labelAppearance: Adyen3DS2_Swift.LegacyInterface.ADYLabelAppearance
-    final public let textFieldAppearance: Adyen3DS2_Swift.LegacyInterface.ADYTextFieldAppearance
-    final public let selectAppearance: Adyen3DS2_Swift.LegacyInterface.ADYSelectAppearance
-    final public let switchAppearance: Adyen3DS2_Swift.LegacyInterface.ADYSwitchAppearance
-    final public let infoAppearance: Adyen3DS2_Swift.LegacyInterface.ADYInfoAppearance
-    final public var modalPresentationStyle: UIKit.UIModalPresentationStyle
+  @_Concurrency.MainActor final public class ADYAppearanceConfiguration : ObjectiveC.NSObject {
+    @_Concurrency.MainActor final public var statusBarStyle: UIKit.UIStatusBarStyle
+    @_Concurrency.MainActor final public var backgroundColor: UIKit.UIColor
+    @_Concurrency.MainActor final public var textColor: UIKit.UIColor
+    @_Concurrency.MainActor final public var borderColor: UIKit.UIColor
+    @_Concurrency.MainActor final public var tintColor: UIKit.UIColor
+    @_Concurrency.MainActor final public let navigationBarAppearance: Adyen3DS2_Swift.LegacyInterface.ADYNavigationBarAppearance
+    @_Concurrency.MainActor final public let labelAppearance: Adyen3DS2_Swift.LegacyInterface.ADYLabelAppearance
+    @_Concurrency.MainActor final public let textFieldAppearance: Adyen3DS2_Swift.LegacyInterface.ADYTextFieldAppearance
+    @_Concurrency.MainActor final public let selectAppearance: Adyen3DS2_Swift.LegacyInterface.ADYSelectAppearance
+    @_Concurrency.MainActor final public let switchAppearance: Adyen3DS2_Swift.LegacyInterface.ADYSwitchAppearance
+    @_Concurrency.MainActor final public let infoAppearance: Adyen3DS2_Swift.LegacyInterface.ADYInfoAppearance
+    @_Concurrency.MainActor final public var modalPresentationStyle: UIKit.UIModalPresentationStyle
     @_Concurrency.MainActor final public func buttonAppearance(for buttonType: Adyen3DS2_Swift.LegacyInterface.ADYAppearanceButtonType) -> Adyen3DS2_Swift.LegacyInterface.ADYButtonAppearance
     @_Concurrency.MainActor @objc override convenience dynamic public init()
     @objc deinit
@@ -529,17 +527,17 @@ public enum LegacyInterface {
     }
   }
   @_hasMissingDesignatedInitializers @available(*, deprecated, message: "This will not be supported in future versions. Use Transaction.")
-  @objc final public class ADYTransaction : ObjectiveC.NSObject {
-    weak final public var securityDelegate: (any Adyen3DS2_Swift.LegacyInterface.ADYSecurityWarningsDelegate)?
-    final public var authenticationRequestParameters: Adyen3DS2_Swift.LegacyInterface.ADYAuthenticationRequestParameters
-    final public let progressView: any Adyen3DS2_Swift.ADYProgressView
+  @objc @_Concurrency.MainActor final public class ADYTransaction : ObjectiveC.NSObject, Swift.Sendable {
+    @_Concurrency.MainActor weak final public var securityDelegate: (any Adyen3DS2_Swift.LegacyInterface.ADYSecurityWarningsDelegate)?
+    @_Concurrency.MainActor final public var authenticationRequestParameters: Adyen3DS2_Swift.LegacyInterface.ADYAuthenticationRequestParameters
+    @_Concurrency.MainActor final public let progressView: any Adyen3DS2_Swift.ADYProgressView
     @available(*, deprecated, message: "This will not be supported in future versions. Use Transaction.performChallenge.")
-    final public func performChallenge(with challengeParameters: Adyen3DS2_Swift.LegacyInterface.ADYChallengeParameters, completion: @escaping (Adyen3DS2_Swift.LegacyInterface.ADYChallengeResult?, Foundation.NSError?) -> Swift.Void)
-    final public func performChallenge(with challengeParameters: Adyen3DS2_Swift.LegacyInterface.ADYChallengeParameters, timeout: Foundation.TimeInterval, completion: @escaping (Adyen3DS2_Swift.LegacyInterface.ADYChallengeResult?, Foundation.NSError?) -> Swift.Void)
+    @_Concurrency.MainActor final public func performChallenge(with challengeParameters: Adyen3DS2_Swift.LegacyInterface.ADYChallengeParameters, completion: @escaping (Adyen3DS2_Swift.LegacyInterface.ADYChallengeResult?, Foundation.NSError?) -> Swift.Void)
+    @_Concurrency.MainActor final public func performChallenge(with challengeParameters: Adyen3DS2_Swift.LegacyInterface.ADYChallengeParameters, timeout: Foundation.TimeInterval, completion: @escaping (Adyen3DS2_Swift.LegacyInterface.ADYChallengeResult?, Foundation.NSError?) -> Swift.Void)
     @available(*, deprecated, message: "This will not be supported in future versions. Use Transaction.performChallenge.")
-    final public func performChallenge(challengeParameters: Adyen3DS2_Swift.LegacyInterface.ADYChallengeParameters, delegate: any Adyen3DS2_Swift.LegacyInterface.ADYChallengeDelegate, timeout: Foundation.TimeInterval)
+    @_Concurrency.MainActor final public func performChallenge(challengeParameters: Adyen3DS2_Swift.LegacyInterface.ADYChallengeParameters, delegate: any Adyen3DS2_Swift.LegacyInterface.ADYChallengeDelegate, timeout: Foundation.TimeInterval)
     @available(*, deprecated, message: "This will not be supported in future versions. Use Transaction.performChallenge.")
-    final public func performChallenge(challengeParameters: Adyen3DS2_Swift.LegacyInterface.ADYChallengeParameters, delegate: any Adyen3DS2_Swift.LegacyInterface.ADYChallengeDelegate)
+    @_Concurrency.MainActor final public func performChallenge(challengeParameters: Adyen3DS2_Swift.LegacyInterface.ADYChallengeParameters, delegate: any Adyen3DS2_Swift.LegacyInterface.ADYChallengeDelegate)
     @objc deinit
   }
 }
@@ -591,12 +589,15 @@ public struct ServiceParameters : Swift.Codable, Swift.Equatable, Swift.Sendable
 }
 extension Adyen3DS2_Swift.WarningSeverity : Swift.Hashable {}
 extension Adyen3DS2_Swift.WarningSeverity : Swift.RawRepresentable {}
+@available(*, deprecated, message: "This will not be supported in future versions.")
+extension Adyen3DS2_Swift.ADYProgress : Swift.Sendable {}
 extension Adyen3DS2_Swift.ButtonAppearanceTextTransform : Swift.Equatable {}
 extension Adyen3DS2_Swift.ButtonAppearanceTextTransform : Swift.Hashable {}
 extension Adyen3DS2_Swift.AppearanceButtonType : Swift.Equatable {}
 extension Adyen3DS2_Swift.AppearanceButtonType : Swift.Hashable {}
 extension Adyen3DS2_Swift.ErrorType : Swift.Equatable {}
 extension Adyen3DS2_Swift.ErrorType : Swift.Hashable {}
+extension Adyen3DS2_Swift.LegacyInterface.ADYService : Swift.Sendable {}
 extension Adyen3DS2_Swift._LoadingIndicatorProvider : Swift.Sendable {}
 extension Adyen3DS2_Swift.Transaction : Swift.Sendable {}
 @available(*, deprecated, message: "This will not be supported in future versions. Use WarningSeverity.")
@@ -611,6 +612,8 @@ extension Adyen3DS2_Swift.LegacyInterface.ADYAppearanceButtonType : Swift.Equata
 extension Adyen3DS2_Swift.LegacyInterface.ADYAppearanceButtonType : Swift.Hashable {}
 @available(*, deprecated, message: "This will not be supported in future versions. Use AppearanceButtonType.")
 extension Adyen3DS2_Swift.LegacyInterface.ADYAppearanceButtonType : Swift.RawRepresentable {}
+@available(*, deprecated, message: "This will not be supported in future versions. Use AppearanceConfiguration.")
+extension Adyen3DS2_Swift.LegacyInterface.ADYAppearanceConfiguration : Swift.Sendable {}
 extension Adyen3DS2_Swift.LegacyInterface.ADYRuntimeErrorCode : Swift.Equatable {}
 extension Adyen3DS2_Swift.LegacyInterface.ADYRuntimeErrorCode : Swift.Hashable {}
 extension Adyen3DS2_Swift.LegacyInterface.ADYRuntimeErrorCode : Swift.RawRepresentable {}
