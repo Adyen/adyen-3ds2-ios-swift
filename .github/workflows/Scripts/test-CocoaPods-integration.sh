@@ -17,45 +17,47 @@ rm -rf $PROJECT_NAME
 
 mkdir -p $PROJECT_NAME && cd $PROJECT_NAME
 
-# Create a new Xcode project.
-swift package init
+echo "
+name: $PROJECT_NAME
+targets:
+  $PROJECT_NAME:
+    type: application
+    platform: iOS
+    sources: Source
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.adyen.$PROJECT_NAME
+  Tests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: Tests
+schemes:
+  TempProject-Package:
+    build:
+      targets:
+        $PROJECT_NAME: all
+        Tests: [tests]
+    test:
+      targets:
+        - Tests
+" > project.yml
 
-# Create the Package.swift.
-echo "// swift-tools-version:5.3
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+mkdir -p Source
 
-import PackageDescription
+echo "
+import Foundation
+import Adyen3DS2_Swift
+@main
+class EmptyClass {static func main() {}}
+"  > Source/EmptyClass.swift
 
-let package = Package(
-    name: \"TempProject\",
-    platforms: [
-        .iOS(.v11)
-    ],
-    products: [
-        .library(
-            name: \"TempProject\",
-            targets: [\"TempProject\"]),
-    ],
-    dependencies: [],
-    targets: [
-        .target(
-            name: \"TempProject\",
-            dependencies: []),
-        .testTarget(
-            name: \"TempProjectTests\",
-            dependencies: [\"TempProject\"]),
-    ]
-)
+mkdir -p Tests
 
-" > Package.swift
-
-swift package update
-
-swift package generate-xcodeproj
+xcodegen generate
 
 # Create a Podfile with our pod as dependency.
 
-echo "platform :ios, '11.0'
+echo "platform :ios, '12.0'
 
 target '$PROJECT_NAME' do
 use_frameworks!
