@@ -11,6 +11,8 @@ on:
 jobs:
 
   SPM:
+    permissions:
+      contents: read
     runs-on: macos-15-xlarge
     steps:
     - uses: actions/checkout@v5
