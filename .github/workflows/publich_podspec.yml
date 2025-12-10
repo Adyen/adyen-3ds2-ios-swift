@@ -8,7 +8,7 @@ jobs:
       contents: read
 
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
 
     - name: Select latest Xcode
       uses: maxim-lobanov/setup-xcode@v1
